@@ -1,7 +1,7 @@
-# trunk-ignore-all(checkov/CKV2_GHA_1)
-# https://github.com/marketplace/actions/golangci-lint
+# Lint the root directory Go files
 
-name: golangci-lint
+name: lint-root
+
 on:
   push:
     branches:
@@ -11,19 +11,18 @@ on:
 
 permissions:
   contents: read
-  # Optional: allow read access to pull requests. Use with `only-new-issues` option.
-  # pull-requests: read
 
 jobs:
-  golangci:
-    name: lint
+  lint-root:
+    name: lint root directory
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - name: golangci-lint
+      - name: golangci-lint root
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.1
+          working-directory: .
