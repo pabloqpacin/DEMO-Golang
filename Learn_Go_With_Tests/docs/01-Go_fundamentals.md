@@ -8,6 +8,8 @@
 - [I. Go fundamentals](#i-go-fundamentals)
   - [1. Install Go](#1-install-go)
   - [2. Hello, World](#2-hello-world)
+    - [First \*\_test.go, go test \& go doc](#first-_testgo-go-test--go-doc)
+    - [TDD](#tdd)
 
 </details>
 
@@ -36,6 +38,8 @@ go mod init lgwt/m
 
 
 ## 2. Hello, World
+
+### First *_test.go, go test & go doc
 
 - Simple Hello World program and execution:
 
@@ -81,8 +85,19 @@ go doc fmt
 # pkgsite -open .
 ```
 
+### TDD
 
+> - In the last example, we wrote the test after the code had been written so that you could get an example of how to write a test and declare a function. From this point on, we will be writing tests first. Our next requirement is to let us specify the recipient of the greeting.
 
+```go
+// hello_test.go
+```
+```go
+// hello.go
+```
+```sh
+go test
+```
 
 <!-- ## 3. Integers -->
 <!-- ## 4. Iteration -->
