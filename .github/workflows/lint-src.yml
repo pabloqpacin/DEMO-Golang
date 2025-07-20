@@ -24,4 +24,4 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.1
-          working-directory: Learn_Go_with_tests/src
+          working-directory: Learn_Go_With_Tests/src
