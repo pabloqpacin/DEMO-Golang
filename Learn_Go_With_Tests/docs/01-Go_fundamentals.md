@@ -10,6 +10,7 @@
   - [2. Hello, World](#2-hello-world)
     - [First \*\_test.go, go test \& go doc](#first-_testgo-go-test--go-doc)
     - [TDD](#tdd)
+    - [Refactoring \& subtests](#refactoring--subtests)
 
 </details>
 
@@ -98,6 +99,22 @@ go doc fmt
 ```sh
 go test
 ```
+
+### Refactoring & subtests
+
+- Constants
+  > - It's worth thinking about creating constants to capture the meaning of values and sometimes to aid performance.
+- Empty strings (**subtests**)
+  > - The next requirement is when our function is called with an empty string it defaults to printing "Hello, World", rather than "Hello, ".
+- Refactor assertion in the test file (make it a function)!!
+  > - For helper functions, it's a good idea to accept a `testing.TB` which is an interface that `*testing.T` and `*testing.B` both satisfy, so you can call helper functions from a test, or a benchmark (don't worry if words like "interface" mean nothing to you right now, it will be covered later).
+- ...
+
+
+```go
+// hello.go
+```
+
 
 <!-- ## 3. Integers -->
 <!-- ## 4. Iteration -->

@@ -4,6 +4,14 @@
 > [Learn Go With Tests website](https://quii.gitbook.io/learn-go-with-tests/)
 
 
+- [Learn Go with Tests](#learn-go-with-tests)
+  - [Index](#index)
+  - [Takeaways](#takeaways)
+    - [TDD cycle](#tdd-cycle)
+
+
+## Index
+
 ```md
 > I. Go fundamentals
 1. Install Go
@@ -55,4 +63,16 @@
 39. Contributing
 40. Chapter Template
 ```
+
+---
+
+## Takeaways
+
+### TDD cycle
+
+- Write a test
+- Make the compiler pass
+- Run the test, see that it fails and check the error message is meaningful
+- Write enough code to make the test pass
+- Refactor
 
