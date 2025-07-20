@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - feat-LGWT_CI
+      - "*"
   pull_request:
 
 permissions:
