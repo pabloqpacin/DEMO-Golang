@@ -7,6 +7,7 @@
 
 - [I. Go fundamentals](#i-go-fundamentals)
   - [1. Install Go](#1-install-go)
+  - [2. Hello, World](#2-hello-world)
 
 </details>
 
@@ -34,7 +35,55 @@ go mod init lgwt/m
 - Go tooling ecosystem: [https://awesome-go.com](https://awesome-go.com/)
 
 
-<!-- ## 2. Hello, World -->
+## 2. Hello, World
+
+- Simple Hello World program and execution:
+
+> - When you write a program in Go, you will have a main package defined with a main func inside it. Packages are ways of grouping up related Go code together.
+> - The func keyword defines a function with a name and a body.
+> - With import "fmt" we are importing a package which contains the Println function that we use to print.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, World!")
+}
+```
+```sh
+go run hello_world.go
+```
+
+
+- Simple testing
+
+```go
+// hello_world.go
+```
+```go
+// hello_world_test.go
+```
+```sh
+go test
+  # PASS
+  # ok      pabloqpacin.com/LearnGoWithTests_module 0.002s
+```
+
+- Misc:
+  > - Go's second tool for viewing documentation is the pkgsite command, which powers Go's official package viewing website. You can install pkgsite with `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, then run it with `pkgsite -open .`. Go's install command will download the source files from that repository and build them into an executable binary. For a default installation of Go, that executable will be in `$HOME/go/bin` for Linux and macOS, and `%USERPROFILE%\go\bin` for Windows. If you have not already added those paths to your $PATH var, you might want to do so to make running go-installed commands easier.
+```sh
+go doc fmt
+
+# # NOTE: not done but interesting
+# go install golang.org/x/pkgsite/cmd/pkgsite@latest
+# pkgsite -open .
+```
+
+
+
+
 <!-- ## 3. Integers -->
 <!-- ## 4. Iteration -->
 <!-- ## 5. Arrays and slices -->
