@@ -8,6 +8,7 @@ DEMO-Go_HTTP_Server
 - Documentation
   - General
     - **[Learn Go with tests](https://quii.gitbook.io/learn-go-with-tests)**
+      - [@Go: Testable Examples](https://go.dev/blog/examples)
     - **Go by Example: [repo](https://github.com/mmcgrana/gobyexample), [website (http servers)](https://gobyexample.com/http-servers)**
   - HTTP Servers
     - [GrafanaLabs:  How I write HTTP services in Go after 13 years (2024)](https://grafana.com/blog/2024/02/09/how-i-write-http-services-in-go-after-13-years/)
