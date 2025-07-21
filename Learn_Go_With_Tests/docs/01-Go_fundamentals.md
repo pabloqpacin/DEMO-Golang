@@ -9,8 +9,11 @@
   - [1. Install Go](#1-install-go)
   - [2. Hello, World](#2-hello-world)
     - [First \*\_test.go, go test \& go doc](#first-_testgo-go-test--go-doc)
+    - [pkgsite](#pkgsite)
     - [TDD](#tdd)
     - [Refactoring \& subtests](#refactoring--subtests)
+  - [3. Integers](#3-integers)
+    - [Testable Examples](#testable-examples)
 
 </details>
 
@@ -86,6 +89,16 @@ go doc fmt
 # pkgsite -open .
 ```
 
+### pkgsite
+
+```sh
+go install golang.org/x/pkgsite/cmd/pkgsite@latest
+pkgsite -open .
+
+open http://localhost:8080
+open http://localhost:8080/testing
+```
+
 ### TDD
 
 > - In the last example, we wrote the test after the code had been written so that you could get an example of how to write a test and declare a function. From this point on, we will be writing tests first. Our next requirement is to let us specify the recipient of the greeting.
@@ -126,7 +139,33 @@ go test
   > - Also, we can group constants in a block instead of declaring them on their own line. For readability, it's a good idea to use a line between sets of related constants.
 
 
-<!-- ## 3. Integers -->
+## 3. Integers
+
+- Simple package:
+  > - You will notice that we're using `%d` as our format strings rather than `%q`. That's because we want it to print an integer rather than a string.
+
+```go
+// adder_test.go
+```
+```sh
+go test
+```
+```go
+// adder.go
+```
+```sh
+go test
+```
+
+### Testable Examples
+
+- Add `ExampleAdd()` to adder_test.go
+  > - Example functions are compiled whenever tests are executed. Because such examples are validated by the Go compiler, you can be confident your documentation's examples always reflect current code behavior.
+  > - Notice the special format of the comment, `// Output: 6`. While the example will always be compiled, adding this comment means the example will also be executed. Go ahead and temporarily remove the comment `// Output: 6`, then run `go test`, and you will see `ExampleAdd` is no longer executed.
+  > - **Examples without output comments are useful for demonstrating code that cannot run as unit tests, such as that which accesses the network, while guaranteeing the example at least compiles.**
+
+
+
 <!-- ## 4. Iteration -->
 <!-- ## 5. Arrays and slices -->
 <!-- ## 6. Structs, methods & interfaces -->
