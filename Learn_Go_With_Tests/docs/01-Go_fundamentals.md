@@ -164,6 +164,21 @@ go test
   > - Notice the special format of the comment, `// Output: 6`. While the example will always be compiled, adding this comment means the example will also be executed. Go ahead and temporarily remove the comment `// Output: 6`, then run `go test`, and you will see `ExampleAdd` is no longer executed.
   > - **Examples without output comments are useful for demonstrating code that cannot run as unit tests, such as that which accesses the network, while guaranteeing the example at least compiles.**
 
+```sh
+cd **/src
+tree
+  #  .
+  # ├──  01_helloworld
+  # │   ├──  hello.go
+  # │   └──  hello_test.go
+  # ├──  02_integers
+  # │   ├──  adder.go
+  # │   └──  adder_test.go
+  # └──  go.mod
+
+go run ./...
+go test ./...
+```
 
 
 <!-- ## 4. Iteration -->
