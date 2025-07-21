@@ -17,6 +17,7 @@
   - [4. Iteration](#4-iteration)
     - [for loops](#for-loops)
     - [Benchmarking](#benchmarking)
+    - [Strings Builder](#strings-builder)
 
 </details>
 
@@ -221,6 +222,17 @@ func Benchmark(b *testing.B) {
 ```sh
 go test -bench=.
 ```
+
+### Strings Builder
+
+- std lib strings.Builder:
+  > - Strings in Go are immutable, meaning every concatenation, such as in our `Repeat` function, involves copying memory to accommodate the new string. This impacts performance, particularly during heavy string concatenation.
+  > - The standard library provides the `strings.Builder` [stringsBuilder](https://pkg.go.dev/strings#Builder) type which minimizes memory copying. It implements a WriteString method which we can use to concatenate strings:
+
+```sh
+go test -bench=. -benchmem
+```
+
 
 
 
