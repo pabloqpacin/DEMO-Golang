@@ -1,5 +1,5 @@
 {
     "recommendations": [
-        "golang.go"
+        "golang.go" // usecase: auto-declare imports
     ]
 }
