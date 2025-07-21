@@ -14,6 +14,9 @@
     - [Refactoring \& subtests](#refactoring--subtests)
   - [3. Integers](#3-integers)
     - [Testable Examples](#testable-examples)
+  - [4. Iteration](#4-iteration)
+    - [for loops](#for-loops)
+    - [Benchmarking](#benchmarking)
 
 </details>
 
@@ -178,10 +181,52 @@ tree
 
 go run ./...
 go test ./...
+
+pkgsite -open .
+open http://localhost:8080
 ```
 
 
-<!-- ## 4. Iteration -->
+## 4. Iteration
+
+### for loops
+
+- `for` loops only (*in Go there are no `while`, `do`, `until` keywords*)
+- Simple TDD:
+
+```go
+// repeat_test.go
+```
+```go
+// repeat.go
+```
+```sh
+go test
+```
+
+### Benchmarking
+
+- [documentation](https://pkg.go.dev/testing#hdr-Benchmarks)
+- Func Structure:
+
+```go
+func Benchmark(b *testing.B) {
+	//... setup ...
+	for b.Loop() {
+		//... code to measure ...
+	}
+	//... cleanup ...
+}
+```
+```sh
+go test -bench=.
+```
+
+
+
+
+
+
 <!-- ## 5. Arrays and slices -->
 <!-- ## 6. Structs, methods & interfaces -->
 <!-- ## 7. Pointers & errors -->
