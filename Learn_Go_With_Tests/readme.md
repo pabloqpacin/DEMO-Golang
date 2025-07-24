@@ -9,6 +9,7 @@
   - [Takeaways](#takeaways)
     - [TDD cycle](#tdd-cycle)
     - [The TDD process and *why* the tests are important](#the-tdd-process-and-why-the-tests-are-important)
+    - [Cost and coverage](#cost-and-coverage)
 
 
 ## Index
@@ -87,3 +88,15 @@ In our case, we've gone from `Hello()` to `Hello("name")` and then to `Hello("na
 
 Of course, this is trivial compared to "real-world" software, but the principles still stand. TDD is a skill that needs practice to develop, but by breaking problems down into smaller components that you can test, you will have a much easier time writing software.
 
+
+### Cost and coverage
+
+It is important to question the value of your tests. It should not be a goal to have as many tests as possible, but rather to have as much confidence as possible in your code base. Having too many tests can turn in to a real problem and it just adds more overhead in maintenance. **Every test has a cost**.
+
+[...] having two tests for this function is redundant. If it works for a slice of one size it's very likely it'll work for a slice of any size (within reason).
+
+```sh
+go test -cover
+  # PASS
+  # coverage: 100.0% of statements
+```

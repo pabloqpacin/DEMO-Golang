@@ -19,6 +19,13 @@
     - [Benchmarking](#benchmarking)
     - [Strings Builder](#strings-builder)
     - [Practice exercises](#practice-exercises)
+  - [5. Arrays and slices](#5-arrays-and-slices)
+    - [Sum function](#sum-function)
+    - [range](#range)
+    - [slices](#slices)
+    - [coverage](#coverage)
+    - [SumAll function](#sumall-function)
+    - [SumAllTails function: pass empty slice for runtime error panic](#sumalltails-function-pass-empty-slice-for-runtime-error-panic)
 
 </details>
 
@@ -245,9 +252,62 @@ go test -bench=. -benchmem
 
 
 
+## 5. Arrays and slices
+
+### Sum function
+
+- Arrays capacity:
+  > - Arrays have a fixed capacity which you define when you declare the variable. We can initialize an array in two ways:
+  >   - `[N]type{value1, value2, ..., valueN} e.g. numbers := [5]int{1, 2, 3, 4, 5}`
+  >   - `[...]type{value1, value2, ..., valueN} e.g. numbers := [...]int{1, 2, 3, 4, 5}`
+
+```go
+// sum_test.go
+```
+```go
+// sum.go
+```
+```sh
+go test
+```
+
+### range
+
+> [@gobyexample: range (Arrays & For loops)](https://gobyexample.com/range)
+
+```go
+// sum.go
+```
+
+### slices
+
+- Go has slices which do not encode the size of the collection and instead can have any size.
+
+### coverage
+
+> [Coverage Tool](https://go.dev/blog/cover)
+
+```sh
+go test -cover
+```
+
+### SumAll function
+
+- We need a new function called `SumAll` which will take a varying number of slices, returning a new slice containing the totals for each slice passed in. Examples:
+  - `SumAll([]int{1,2}, []int{0,9}) would return []int{3, 9}`
+  - `SumAll([]int{1,1,1}) would return []int{3}`
+- [`make` function](https://go.dev/tour/moretypes/13) to create slices
 
 
-<!-- ## 5. Arrays and slices -->
+
+### SumAllTails function: pass empty slice for runtime error panic
+
+- ...
+- ... eventually, "we're showing a new technique, assigning a function to a variable", `checkSums := func(t testing.TB, got, want []int) {`
+
+
+
+
 <!-- ## 6. Structs, methods & interfaces -->
 <!-- ## 7. Pointers & errors -->
 <!-- ## 8. Maps -->
