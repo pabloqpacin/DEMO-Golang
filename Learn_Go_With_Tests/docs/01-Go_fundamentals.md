@@ -27,6 +27,7 @@
     - [SumAll function](#sumall-function)
     - [SumAllTails function: pass empty slice for runtime error panic](#sumalltails-function-pass-empty-slice-for-runtime-error-panic)
   - [6. Structs, methods \& interfaces (\& TableDrivenTests)](#6-structs-methods--interfaces--tabledriventests)
+  - [7. Pointers \& errors (errcheck)](#7-pointers--errors-errcheck)
 
 </details>
 
@@ -300,12 +301,10 @@ go test -cover
 - [`make` function](https://go.dev/tour/moretypes/13) to create slices
 
 
-
 ### SumAllTails function: pass empty slice for runtime error panic
 
 - ...
 - ... eventually, "we're showing a new technique, assigning a function to a variable", `checkSums := func(t testing.TB, got, want []int) {`
-
 
 
 ## 6. Structs, methods & interfaces (& TableDrivenTests)
@@ -322,6 +321,24 @@ go test -cover
 - [**Table driven tests**](https://go.dev/wiki/TableDrivenTests):
 
 
+## 7. Pointers & errors (errcheck)
+
+<!-- > manage state... -->
+
+>  [!TIP]
+> - When a function returns a pointer to something, you need to make sure you check if it's nil or you might raise a runtime exception - the compiler won't help you here.
+> - [Don't just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully)
+
+- "In Go if a symbol (variables, types, functions et al) starts with a lowercase symbol then it is private outside the package it's defined in."
+- "Without getting too computer-sciency, when you create a value - like a wallet, it is stored somewhere in memory. You can find out what the *address* of that bit of memory with `&myVal`."
+- "*You can see that the addresses of the two balances are different. So when we change the value of the balance inside the code, we are working on a copy of what came from the test. Therefore the balance in the test is unchanged.*"
+- [pointers](https://gobyexample.com/pointers)
+- Pointers to structs even have their own name: **struct pointers** and they are [automatically dereferenced](https://go.dev/ref/spec#Method_values)
+- [Stringer](https://pkg.go.dev/fmt#Stringer): permite extender el output...
+- **Error management**:
+  - `nil` is synonymous with `null` from other programming languages. Errors can be `nil` because the return type of `Withdraw` will be `error`, which is an interface. If you see a function that takes arguments or returns values that are interfaces, they can be nillable.
+  - Like `null` if you try to access a value that is `nil` it will throw a runtime panic. This is bad! You should make sure that you check for `nil`s.
+  - `t.Fatal`: "`t.Fatal` which will stop the test if it is called. This is because we don't want to make any more assertions on the error returned if there isn't one around. Without this the test would carry on to the next step and panic because of a nil pointer."
 
 
 
@@ -329,9 +346,6 @@ go test -cover
 
 
 
-
-
-<!-- ## 7. Pointers & errors -->
 <!-- ## 8. Maps -->
 <!-- ## 9. Dependency Injection -->
 <!-- ## 10. Mocking -->

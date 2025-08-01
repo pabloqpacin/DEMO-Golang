@@ -10,6 +10,7 @@
     - [TDD cycle](#tdd-cycle)
     - [The TDD process and *why* the tests are important](#the-tdd-process-and-why-the-tests-are-important)
     - [Cost and coverage](#cost-and-coverage)
+    - [Error handling](#error-handling)
 
 
 ## Index
@@ -99,4 +100,11 @@ It is important to question the value of your tests. It should not be a goal to 
 go test -cover
   # PASS
   # coverage: 100.0% of statements
+```
+
+### Error handling
+
+```sh
+# check for errors that are not checked...
+errcheck ./...
 ```
