@@ -26,6 +26,7 @@
     - [coverage](#coverage)
     - [SumAll function](#sumall-function)
     - [SumAllTails function: pass empty slice for runtime error panic](#sumalltails-function-pass-empty-slice-for-runtime-error-panic)
+  - [6. Structs, methods \& interfaces (\& TableDrivenTests)](#6-structs-methods--interfaces--tabledriventests)
 
 </details>
 
@@ -307,8 +308,29 @@ go test -cover
 
 
 
+## 6. Structs, methods & interfaces (& TableDrivenTests)
 
-<!-- ## 6. Structs, methods & interfaces -->
+- [struct **types**](https://go.dev/ref/spec#Struct_types) <!-- clases -->
+- [types **method declarations**](https://go.dev/ref/spec#Method_declarations):
+  - "A method is a function with a receiver. A method declaration binds an identifier, the method name, to a method, and associates the method with the receiver's base type."
+  - "Methods are very similar to functions but they are called by invoking them on an instance of a particular type. Where you can just call functions wherever you like, such as `Area(rectangle)` you can only call methods on "things"."
+  - "It is a convention in Go to have the receiver variable be the first letter of the type." (`r Rectangle`)
+- [interfaces](https://go.dev/ref/spec#Interface_types): (avoid duplication thru [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism))
+  - "are a very powerful concept in statically typed languages like Go because they allow you to make functions that can be used with different types and create highly-decoupled code whilst still maintaining type-safety."
+  - "In Go interface resolution is implicit. If the type you pass in matches what the interface is asking for, it will compile."
+  - **Declouping**: "[...] By declaring an interface, the helper is decoupled from the concrete types and only has the method it needs to do its job. [...] This kind of approach of using interfaces to declare only what you need is very important in software design and will be covered in more detail in later sections."
+- [**Table driven tests**](https://go.dev/wiki/TableDrivenTests):
+
+
+
+
+
+
+
+
+
+
+
 <!-- ## 7. Pointers & errors -->
 <!-- ## 8. Maps -->
 <!-- ## 9. Dependency Injection -->
