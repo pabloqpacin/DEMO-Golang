@@ -97,10 +97,6 @@ go test
   > - Go's second tool for viewing documentation is the pkgsite command, which powers Go's official package viewing website. You can install pkgsite with `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, then run it with `pkgsite -open .`. Go's install command will download the source files from that repository and build them into an executable binary. For a default installation of Go, that executable will be in `$HOME/go/bin` for Linux and macOS, and `%USERPROFILE%\go\bin` for Windows. If you have not already added those paths to your $PATH var, you might want to do so to make running go-installed commands easier.
 ```sh
 go doc fmt
-
-# # NOTE: not done but interesting
-# go install golang.org/x/pkgsite/cmd/pkgsite@latest
-# pkgsite -open .
 ```
 
 ### pkgsite
