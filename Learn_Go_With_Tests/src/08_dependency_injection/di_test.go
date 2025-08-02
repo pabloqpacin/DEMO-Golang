@@ -19,11 +19,3 @@ func TestGreet(t *testing.T) {
 		t.Errorf("got %q want %q", got, want)
 	}
 }
-
-// func assertStrings(t testing.TB, got, want string) {
-// 	t.Helper()
-
-// 	if got != want {
-// 		t.Errorf("got %q want %q", got, want)
-// 	}
-// }
