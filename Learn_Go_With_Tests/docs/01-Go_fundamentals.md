@@ -28,6 +28,7 @@
     - [SumAllTails function: pass empty slice for runtime error panic](#sumalltails-function-pass-empty-slice-for-runtime-error-panic)
   - [6. Structs, methods \& interfaces (\& TableDrivenTests)](#6-structs-methods--interfaces--tabledriventests)
   - [7. Pointers \& errors (errcheck)](#7-pointers--errors-errcheck)
+  - [8. Maps (CRUD)](#8-maps-crud)
 
 </details>
 
@@ -337,12 +338,35 @@ go test -cover
   - `t.Fatal`: "`t.Fatal` which will stop the test if it is called. This is because we don't want to make any more assertions on the error returned if there isn't one around. Without this the test would carry on to the next step and panic because of a nil pointer."
 
 
+## 8. Maps (CRUD)
+
+- In *arrays & slices*, we saw how to store values in order. Now, we will look at a way to store items by a key and look them up quickly.
+- **Declaration**:
+  - Declaring a Map is somewhat similar to an array. Except, it starts with the `map` keyword and requires two types. The first is the key type, which is written inside the `[]`. The second is the value type, which goes right after the `[]`.
+  - The key type is special. It can only be a comparable type because without the ability to tell if 2 keys are equal, we have no way to ensure that we are getting the correct value. Comparable types are explained in depth in the [language spec](https://go.dev/ref/spec#Comparison_operators).
+- *Pointers, copies, et al*...
+  - <!-- So when you pass a map to a function/method, you are indeed copying it, but just the pointer part, not the underlying data structure that contains the data. -->
+  A gotcha with maps is that they can be a nil value. A nil map behaves like an empty map when reading, but attempts to write to a nil map will cause a runtime panic. You can read more about maps here.
+  - Therefore, you should never initialize a nil map variable:
+```go
+var m map[string]string
+```
+- - Instead, you can initialize an empty map or use the make keyword to create a map for you:
+```go
+var dictionary = map[string]string{}
+// OR
+var dictionary = make(map[string]string)
+```
+- - Both approaches create an empty hash map and point dictionary at it. Which ensures that you will never get a runtime panic.
+- (Case of repetitions:) Map will not throw an error if the value already exists. Instead, they will go ahead and overwrite the value with the newly provided value. This can be convenient in practice, but makes our function name less than accurate. Add should not modify existing values. It should only add new words to our dictionary.
+- ...
+- [`error` interface & constants...](https://dave.cheney.net/2016/04/07/constant-errors)
 
 
 
 
 
-<!-- ## 8. Maps -->
+
 <!-- ## 9. Dependency Injection -->
 <!-- ## 10. Mocking -->
 <!-- ## 11. Concurrency -->
