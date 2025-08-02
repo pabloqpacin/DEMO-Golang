@@ -29,6 +29,7 @@
   - [6. Structs, methods \& interfaces (\& TableDrivenTests)](#6-structs-methods--interfaces--tabledriventests)
   - [7. Pointers \& errors (errcheck)](#7-pointers--errors-errcheck)
   - [8. Maps (CRUD)](#8-maps-crud)
+  - [9. Dependency Injection](#9-dependency-injection)
 
 </details>
 
@@ -363,11 +364,13 @@ var dictionary = make(map[string]string)
 - [`error` interface & constants...](https://dave.cheney.net/2016/04/07/constant-errors)
 
 
+## 9. Dependency Injection
+
+- ...
 
 
 
 
-<!-- ## 9. Dependency Injection -->
 <!-- ## 10. Mocking -->
 <!-- ## 11. Concurrency -->
 <!-- ## 12. Select -->
