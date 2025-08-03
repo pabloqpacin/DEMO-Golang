@@ -26,6 +26,11 @@
     - [coverage](#coverage)
     - [SumAll function](#sumall-function)
     - [SumAllTails function: pass empty slice for runtime error panic](#sumalltails-function-pass-empty-slice-for-runtime-error-panic)
+  - [6. Structs, methods \& interfaces (\& TableDrivenTests)](#6-structs-methods--interfaces--tabledriventests)
+  - [7. Pointers \& errors (errcheck)](#7-pointers--errors-errcheck)
+  - [8. Maps (CRUD)](#8-maps-crud)
+  - [9. Dependency Injection](#9-dependency-injection)
+  - [10. Mocking](#10-mocking)
 
 </details>
 
@@ -95,10 +100,6 @@ go test
   > - Go's second tool for viewing documentation is the pkgsite command, which powers Go's official package viewing website. You can install pkgsite with `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, then run it with `pkgsite -open .`. Go's install command will download the source files from that repository and build them into an executable binary. For a default installation of Go, that executable will be in `$HOME/go/bin` for Linux and macOS, and `%USERPROFILE%\go\bin` for Windows. If you have not already added those paths to your $PATH var, you might want to do so to make running go-installed commands easier.
 ```sh
 go doc fmt
-
-# # NOTE: not done but interesting
-# go install golang.org/x/pkgsite/cmd/pkgsite@latest
-# pkgsite -open .
 ```
 
 ### pkgsite
@@ -299,20 +300,89 @@ go test -cover
 - [`make` function](https://go.dev/tour/moretypes/13) to create slices
 
 
-
 ### SumAllTails function: pass empty slice for runtime error panic
 
 - ...
 - ... eventually, "we're showing a new technique, assigning a function to a variable", `checkSums := func(t testing.TB, got, want []int) {`
 
 
+## 6. Structs, methods & interfaces (& TableDrivenTests)
+
+- [struct **types**](https://go.dev/ref/spec#Struct_types) <!-- clases -->
+- [types **method declarations**](https://go.dev/ref/spec#Method_declarations):
+  - "A method is a function with a receiver. A method declaration binds an identifier, the method name, to a method, and associates the method with the receiver's base type."
+  - "Methods are very similar to functions but they are called by invoking them on an instance of a particular type. Where you can just call functions wherever you like, such as `Area(rectangle)` you can only call methods on "things"."
+  - "It is a convention in Go to have the receiver variable be the first letter of the type." (`r Rectangle`)
+- [interfaces](https://go.dev/ref/spec#Interface_types): (avoid duplication thru [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism))
+  - "are a very powerful concept in statically typed languages like Go because they allow you to make functions that can be used with different types and create highly-decoupled code whilst still maintaining type-safety."
+  - "In Go interface resolution is implicit. If the type you pass in matches what the interface is asking for, it will compile."
+  - **Declouping**: "[...] By declaring an interface, the helper is decoupled from the concrete types and only has the method it needs to do its job. [...] This kind of approach of using interfaces to declare only what you need is very important in software design and will be covered in more detail in later sections."
+- [**Table driven tests**](https://go.dev/wiki/TableDrivenTests):
 
 
-<!-- ## 6. Structs, methods & interfaces -->
-<!-- ## 7. Pointers & errors -->
-<!-- ## 8. Maps -->
-<!-- ## 9. Dependency Injection -->
-<!-- ## 10. Mocking -->
+## 7. Pointers & errors (errcheck)
+
+<!-- > manage state... -->
+
+>  [!TIP]
+> - When a function returns a pointer to something, you need to make sure you check if it's nil or you might raise a runtime exception - the compiler won't help you here.
+> - [Don't just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully)
+
+- "In Go if a symbol (variables, types, functions et al) starts with a lowercase symbol then it is private outside the package it's defined in."
+- "Without getting too computer-sciency, when you create a value - like a wallet, it is stored somewhere in memory. You can find out what the *address* of that bit of memory with `&myVal`."
+- "*You can see that the addresses of the two balances are different. So when we change the value of the balance inside the code, we are working on a copy of what came from the test. Therefore the balance in the test is unchanged.*"
+- [pointers](https://gobyexample.com/pointers)
+- Pointers to structs even have their own name: **struct pointers** and they are [automatically dereferenced](https://go.dev/ref/spec#Method_values)
+- [Stringer](https://pkg.go.dev/fmt#Stringer): permite extender el output...
+- **Error management**:
+  - `nil` is synonymous with `null` from other programming languages. Errors can be `nil` because the return type of `Withdraw` will be `error`, which is an interface. If you see a function that takes arguments or returns values that are interfaces, they can be nillable.
+  - Like `null` if you try to access a value that is `nil` it will throw a runtime panic. This is bad! You should make sure that you check for `nil`s.
+  - `t.Fatal`: "`t.Fatal` which will stop the test if it is called. This is because we don't want to make any more assertions on the error returned if there isn't one around. Without this the test would carry on to the next step and panic because of a nil pointer."
+
+
+## 8. Maps (CRUD)
+
+- In *arrays & slices*, we saw how to store values in order. Now, we will look at a way to store items by a key and look them up quickly.
+- **Declaration**:
+  - Declaring a Map is somewhat similar to an array. Except, it starts with the `map` keyword and requires two types. The first is the key type, which is written inside the `[]`. The second is the value type, which goes right after the `[]`.
+  - The key type is special. It can only be a comparable type because without the ability to tell if 2 keys are equal, we have no way to ensure that we are getting the correct value. Comparable types are explained in depth in the [language spec](https://go.dev/ref/spec#Comparison_operators).
+- *Pointers, copies, et al*...
+  - <!-- So when you pass a map to a function/method, you are indeed copying it, but just the pointer part, not the underlying data structure that contains the data. -->
+  A gotcha with maps is that they can be a nil value. A nil map behaves like an empty map when reading, but attempts to write to a nil map will cause a runtime panic. You can read more about maps here.
+  - Therefore, you should never initialize a nil map variable:
+```go
+var m map[string]string
+```
+- - Instead, you can initialize an empty map or use the make keyword to create a map for you:
+```go
+var dictionary = map[string]string{}
+// OR
+var dictionary = make(map[string]string)
+```
+- - Both approaches create an empty hash map and point dictionary at it. Which ensures that you will never get a runtime panic.
+- (Case of repetitions:) Map will not throw an error if the value already exists. Instead, they will go ahead and overwrite the value with the newly provided value. This can be convenient in practice, but makes our function name less than accurate. Add should not modify existing values. It should only add new words to our dictionary.
+- ...
+- [`error` interface & constants...](https://dave.cheney.net/2016/04/07/constant-errors)
+
+
+## 9. Dependency Injection
+
+- ...
+
+
+## 10. Mocking
+
+- [...] We have a dependency on `Sleep`ing which we need to extract so we can then control it in our tests. If we can *mock* `time.Sleep` we can use *dependency injection* to use it instead of a "real" `time.Sleep` and then we can **spy on the calls** to make assertions on them.
+- *Spies* are a kind of *mock* which can record how a dependency is used. They can record the arguments sent in, how many times it has been called, etc. In our case, we're keeping track of how many times ` is called so we can check it in our test.
+- [...] Normally a lot of mocking points to bad abstraction in your code.
+- [@MartinFowler: Test Double is a generic term for any case where you replace a production object for testing purposes](https://martinfowler.com/bliki/TestDouble.html)
+
+
+
+
+
+
+
 <!-- ## 11. Concurrency -->
 <!-- ## 12. Select -->
 <!-- ## 13. Reflection -->

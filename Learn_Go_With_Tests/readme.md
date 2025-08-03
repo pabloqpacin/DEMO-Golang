@@ -10,6 +10,8 @@
     - [TDD cycle](#tdd-cycle)
     - [The TDD process and *why* the tests are important](#the-tdd-process-and-why-the-tests-are-important)
     - [Cost and coverage](#cost-and-coverage)
+    - [Error handling](#error-handling)
+    - [Refactoring](#refactoring)
 
 
 ## Index
@@ -78,6 +80,7 @@
 - Write enough code to make the test pass
 - Refactor
 
+
 ### The TDD process and *why* the tests are important
 
 - *Write a failing test and see it fail* so we know we have written a *relevant* test for our requirements and seen that it produces an *easy to understand description of the failure*
@@ -88,6 +91,13 @@ In our case, we've gone from `Hello()` to `Hello("name")` and then to `Hello("na
 
 Of course, this is trivial compared to "real-world" software, but the principles still stand. TDD is a skill that needs practice to develop, but by breaking problems down into smaller components that you can test, you will have a much easier time writing software.
 
+<!--
+---
+I.9
+ -->
+
+
+- We don't want to spend a long time with code that will theoretically work after some hacking because that's often how developers fall down rabbit holes. **It's an important skill to be able to slice up requirements as small as you can so you can have working software.**
 
 ### Cost and coverage
 
@@ -100,3 +110,17 @@ go test -cover
   # PASS
   # coverage: 100.0% of statements
 ```
+
+### Error handling
+
+```sh
+# check for errors that are not checked...
+errcheck ./...
+```
+
+<!-- OJO con movidas en 08... -->
+
+
+### Refactoring
+
+- Turn *magic numbers* into constants (eg. `09_mocking.Countdown.Fprintln`)
