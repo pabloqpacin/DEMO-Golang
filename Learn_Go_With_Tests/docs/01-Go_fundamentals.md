@@ -373,8 +373,9 @@ var dictionary = make(map[string]string)
 ## 10. Mocking
 
 - [...] We have a dependency on `Sleep`ing which we need to extract so we can then control it in our tests. If we can *mock* `time.Sleep` we can use *dependency injection* to use it instead of a "real" `time.Sleep` and then we can **spy on the calls** to make assertions on them.
-- *Spies* are a kind of *mock* which can record how a dependency is used. They can record the arguments sent in, how many times it has been called, etc. In our case, we're keeping track of how many times `Sleep()` is called so we can check it in our test.
-
+- *Spies* are a kind of *mock* which can record how a dependency is used. They can record the arguments sent in, how many times it has been called, etc. In our case, we're keeping track of how many times ` is called so we can check it in our test.
+- [...] Normally a lot of mocking points to bad abstraction in your code.
+- [@MartinFowler: Test Double is a generic term for any case where you replace a production object for testing purposes](https://martinfowler.com/bliki/TestDouble.html)
 
 
 
