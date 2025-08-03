@@ -63,11 +63,15 @@ const countdownStart = 3
 
 func Countdown(out io.Writer, sleeper Sleeper) {
 	for i := countdownStart; i > 0; i-- {
-		fmt.Fprintln(out, i)
+		if _, err := fmt.Fprintln(out, i); err != nil {
+			return
+		}
 		sleeper.Sleep()
 	}
 
-	fmt.Fprint(out, finalWord)
+	if _, err := fmt.Fprint(out, finalWord); err != nil {
+		return
+	}
 }
 
 func main() {
